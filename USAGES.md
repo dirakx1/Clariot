@@ -1,4 +1,4 @@
-# Example applications and uses of dockeriot
+# Example applications and uses of clariot
 
 Dockeriot can be applied to a wide range of IOT wide deployment scenarios and integrations 
 

@@ -1,6 +1,6 @@
 FROM debian:stretch
 
-MAINTAINER dockeriot team
+MAINTAINER clariot team
 
 ## CONFIGURE LOCALES
 RUN apt-get update && apt-get install -y locales && \
@@ -11,7 +11,7 @@ ENV LANG en_US.UTF-8
 ## UPDATE REPOSITORIES, INSTALL PIP AND BUILD DEPENDENCIES 
 RUN apt-get update 
 
-ENV GITPROJECT dockeriot-test  # GIT repo of flask microservice.
+ENV GITPROJECT clariot-test  # GIT repo of flask microservice.
 
 ## INSTALL requirements.txt
 
@@ -31,4 +31,4 @@ WORKDIR /app
 RUN groupadd -g 1000 -r flask && useradd -r -u 1000 -g flask flask
 RUN mkdir /home/flask && chown flask: /home/flask
 USER flask
-#ENTRYPOINT ["dockeriot-entrypoint.sh"]
+#ENTRYPOINT ["clariot-entrypoint.sh"]

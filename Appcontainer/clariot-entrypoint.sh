@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 #
 # Description:
-#	This script is the entrypoint of a dockeriot container and is needed
+#	This script is the entrypoint of a clariot container and is needed
 # when building the container based on Dockerfile.flask
 #
 
 set -e
 
 APPDIR="/app/"
-APPNAME="dockeriot-test"
+APPNAME="clariot-test"
 
 cd $APPDIR
 

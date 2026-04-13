@@ -1,4 +1,4 @@
-# COmcontainer for dockeriot 
+# COmcontainer for clariot 
 
 Containerization of software applications that interact with IOT devices,
 set u of communications protocols between devices. 

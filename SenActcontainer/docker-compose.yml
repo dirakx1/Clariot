@@ -3,17 +3,17 @@
 version: '3'
 services:
 
-  dockeriot-sensor:
+  clariot-sensor:
     build:
       context: "."
       dockerfile: senact.Dockerfile
 
-  dockeriot-actuator:
+  clariot-actuator:
     build:
       context: "."
       dockerfile: senact.Dockerfile
 
-  dockeriot-nginx-test:
+  clariot-nginx-test:
     image: nginx
     ports:
     - "80:80"

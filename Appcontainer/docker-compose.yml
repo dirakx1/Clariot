@@ -5,12 +5,12 @@
 version: '3'
 services:
   
-  dockeriot-flask-test:
+  clariot-flask-test:
     build:
       context: "."      
       dockerfile: Dockerfile.flask    
   
-  dockeriot-nginx-test:
+  clariot-nginx-test:
     image: nginx
     ports:
     - "80:80"

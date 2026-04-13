@@ -5,12 +5,12 @@
 version: '3'
 services:
 
-  dockeriot-com:
+  clariot-com:
     build:
       context: "."
       dockerfile: com.Dockerfile
 
-  dockeriot-nginx:
+  clariot-nginx:
     image: nginx
     ports:
     - "80:80"

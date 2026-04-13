@@ -4,17 +4,17 @@
 version: '3'
 services:
   
-  dockeriot-ind-test:
+  clariot-ind-test:
     build:
       context: "."      
       dockerfile: ind.Dockerfile
  
-  dockeriot-ind2-test:
+  clariot-ind2-test:
     build:
       context: "."      
       dockerfile: ind.Dockerfile
   
-  dockeriot-nginx-test:
+  clariot-nginx-test:
     image: nginx
     ports:
     - "80:80"

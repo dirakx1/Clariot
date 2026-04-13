@@ -1,4 +1,4 @@
-# Appcontainer for dockeriot 
+# Appcontainer for clariot 
 
 Containerization of software applications that interact with IOT devices
 

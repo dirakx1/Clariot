@@ -1,9 +1,9 @@
 
 # Installation
-This manual describes dockeriot installation on a Raspberry Pi. 
+This manual describes clariot installation on a Raspberry Pi. 
 but you can also do local emulation for developing and prototyping. 
 
-For dockeriot use we need to install docker under an ARM based arquitecture (Raspberry OS architecture), that is common for embedded systems. 
+For clariot use we need to install docker under an ARM based arquitecture (Raspberry OS architecture), that is common for embedded systems. 
 we are going to describe a basic installation for the raspberry pi3 platform using the raspbian OS.
 
 ## Raspbian installation
@@ -55,20 +55,20 @@ $ sudo apt-get install docker-compose
 ```
 $ docker-compose --version
 ```
-## Install dockeriot
+## Install clariot
 
-Dockerfile.dockeriot has a description of all the necessary services to run a demo application on the [Things layer](ThingsLayer.md).
+Dockerfile.clariot has a description of all the necessary services to run a demo application on the [Things layer](ThingsLayer.md).
 ```
-$ docker-compose up -f Appcontianr/Dockerfile.dockeriot.yaml 
+$ docker-compose up -f Appcontianr/Dockerfile.clariot.yaml 
 ```
 
 ## Dockeriot automatic installation
 * [Installation](installation.sh) script. 
 
-## Test that dockeriot is up and running well.
-* Check that dockeriot is running ok: 
+## Test that clariot is up and running well.
+* Check that clariot is running ok: 
 ```
-check_dockeriot.sh
+check_clariot.sh
 ```
 ## Updates 
 * (for images with docker on RPI) available at: https://blog.hypriot.com/downloads/
