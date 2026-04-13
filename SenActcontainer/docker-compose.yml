@@ -1,23 +1,45 @@
-# docker compose file for flask microservice that expose sensor/actuator data.
+# Clariot Sensor & Actuator Container - Data acquisition and action execution
+version: '3.8'
 
-version: '3'
 services:
-
-  clariot-sensor:
-    build:
-      context: "."
-      dockerfile: senact.Dockerfile
-
-  clariot-actuator:
-    build:
-      context: "."
-      dockerfile: senact.Dockerfile
-
-  clariot-nginx-test:
-    image: nginx
+  # MQTT Broker
+  mqtt:
+    image: eclipse-mosquitto:2
+    container_name: clariot_senact_mqtt
     ports:
-    - "80:80"
+      - "1884:1883"  # Different port to avoid conflict
+    networks:
+      - clariot_senact_net
+    healthcheck:
+      test: ["CMD", "mosquitto_sub", "-t", "$$SYS/#", "-C", "1", "-i", "healthcheck", "-W", "3"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Sensor & Actuator Container
+  senact:
+    build:
+      context: .
+      dockerfile: senact.Dockerfile
+    container_name: clariot_senact
+    environment:
+      - MQTT_BROKER=mqtt://mqtt:1883
+      - SENSOR_INTERVAL=${SENSOR_INTERVAL:-1000}
+      - AGENT_ID=${AGENT_ID:-clariot_agent_1}
+      - MOCK_MODE=${MOCK_MODE:-true}
+      - STANDALONE_MODE=${STANDALONE_MODE:-false}
+    depends_on:
+      mqtt:
+        condition: service_healthy
+    networks:
+      - clariot_senact_net
     volumes:
-    - ./vhosts/:/etc/nginx/conf.d/:ro
-    - ./error-pages/:/usr/share/nginx/html/:ro
-- ./conf/nginx.conf:/etc/nginx/nginx.conf:ro
+      - senact_data:/app/data
+    restart: unless-stopped
+
+networks:
+  clariot_senact_net:
+    driver: bridge
+
+volumes:
+  senact_data:

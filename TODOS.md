@@ -1,13 +1,19 @@
-* IOTA integration (see sensor examples on https://industrymarketplace.net/) 
-* Kubernates - terraform suport - improve design graph for kubernates: 
-* Cloud coding
-* https://blog.hypriot.com/post/setup-kubernetes-raspberry-pi-cluster/
-* https://blog.sicara.com/build-own-cloud-kubernetes-raspberry-pi-9e5a98741b49
-* HypriotOS support. 
-* Testing 
-* Add Use examples
-* Integration with other platforms.
-* Add support example of smart contract application on DLTs (IOTA / HOLOchain)
-* Goshimmer nodes could be installed on raspberry with tinyGo, this nodes are needed for SC executions.
-* AI Revamp. 
+# Clariot Development Roadmap
 
+## Completed
+- [x] Agent Container with LLM reasoning
+- [x] Sensor/Actuator integration
+- [x] MQTT communication layer
+- [x] REST API control plane
+- [x] WebSocket real-time interface
+
+## In Progress
+- [ ] PLC bridge integration
+- [ ] OPC-UA support
+- [ ] Multi-agent coordination
+
+## Planned
+- [ ] Voice control interface
+- [ ] Mobile app integration
+- [ ] ML model training pipeline
+- [ ] Grafana dashboards

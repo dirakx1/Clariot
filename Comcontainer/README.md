@@ -1,21 +1,16 @@
-# COmcontainer for clariot 
+# Communication Container
 
-Containerization of software applications that interact with IOT devices,
-set u of communications protocols between devices. 
+This container handles device-to-device and device-to-cloud communication for the Clariot platform.
 
-## Testing
+## Responsibilities
 
-Locally you can use: 
+- MQTT broker connectivity
+- Device discovery
+- Message routing between layers
+- Protocol translation (if needed)
 
-* ```sudo docker-compose -f docker-compose-test.yml  up -d```
+## Usage
 
-or 
-
-* ```docker-compose -f docker-compose-test.yml  up -d```  
-
-Depending on your local docker configuration. 
-
-## For ready to use applications 
-
-* ```sudo docker-compose -f docker-compose.yml  up -d```
-* ```docker-compose -f docker-compose.yml  up -d```
+```bash
+docker-compose -f Comcontainer/docker-compose.yml up -d
+```

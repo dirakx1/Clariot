@@ -1,31 +1,108 @@
-# Dockeriot
+# Clariot - AI-Powered IoT Agent Platform
 
-Dockeriot is an apps development platform for IOT devices using docker.
-Dockeriot aims to enable all the features of containers for applications
-under an Internet of things (IOT - cloud enabled) environment. If you want to see further and rapid developments on clariot please support us via  [Contact](CONTACT.md) or [Funding](.github/FUNDING.yml)
+Clariot is an **AI agent-based IoT development platform** that enables containerized LLM-powered agents to interact with sensors and actuators across all layers. The platform uses a **Sensor → Agent (LLM) → Actuator** architecture where AI agents process sensor data and produce actions.
 
-Applications of clariot include: 
-* Testing and deploying of complex applications on many devices in a replicable and scalable way. 
-* Fast integration of new features in a chain of devices allowing testing deploying and integration.
-* Fast integration with distributed technologies like blockchain and other DLTs (f.e IOTA and HOLOchain)
-* Support for Smart Contracts on different chains. 
+## Architecture Overview
 
-```Note: Although here we depict a general platform, the first layer that is developed is the:``` [Things Layer](ThingsLayer.md)
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                         USER CONTROL                            │
+│            (Chat Interface / API / Voice Commands)              │
+└────────────────────────────┬────────────────────────────────────┘
+                             │ Natural Language / Commands
+                             ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                    LLM CONTROL PLANE                            │
+│   ┌──────────────┐  ┌──────────────┐  ┌──────────────┐          │
+│   │  Agent       │  │  Agent       │  │  Agent       │          │
+│   │  Orchestrator│  │  Planner     │  │  Coordinator │          │
+│   └──────────────┘  └──────────────┘  └──────────────┘          │
+└────────────────────────────┬────────────────────────────────────┘
+                             │ Agent Messages (MCP/MQTT/AMQP)
+                             ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                      AGENT CONTAINERS                           │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐               │
+│  │ Layer 1     │  │ Layer 2     │  │ Layer N     │               │
+│  │ Agent       │  │ Agent       │  │ Agent       │               │
+│  └──────┬──────┘  └──────┬──────┘  └──────┬──────┘               │
+│         │                │                │                      │
+│         ▼                ▼                ▼                      │
+│  ┌─────────────────────────────────────────────────────┐         │
+│  │              SENSOR / ACTUATOR DATA BUS            │         │
+│  └─────────────────────────────────────────────────────┘         │
+└────────────────────────────┬────────────────────────────────────┘
+                             │
+              ┌──────────────┴──────────────┐
+              ▼                             ▼
+    ┌─────────────────┐           ┌─────────────────┐
+    │    SENSORS      │           │   ACTUATORS     │
+    │  (Data Input)   │           │  (Actions Out)  │
+    │  • Temperature  │           │  • Motors       │
+    │  • Pressure     │           │  • Valves       │
+    │  • Proximity    │           │  • Switches     │
+    │  • Camera       │           │  • Displays     │
+    └─────────────────┘           └─────────────────┘
+```
 
-## General scheme
-This scheme describes the basic components of clariot, each device f.e a raspberry board can have installed docker or kubernetes in which 
-a full application can be defined abstracting de underlaying operative system. 
+## Core Concepts
 
-<img src="./images/IotPlatform.jpeg">
+### Agent Architecture
+Each layer contains **autonomous AI agents** that:
+- **Receive** data from sensors
+- **Process** using LLM reasoning
+- **Decide** on actions to take
+- **Output** commands to actuators
 
+### Data Flow
+1. **Sensor Layer**: Collects physical data (temperature, motion, etc.)
+2. **Agent Processing**: LLM analyzes data and decides response
+3. **Actuator Layer**: Executes physical actions based on agent decisions
 
-* The things and green layer can be implemented with other embedded platforms different than raspberry
-* For more information on layers you can see: [Things Layer](ThingsLayer.md), [Industrial Layer](IndustrialLayer.md), [Analytics Layer](AnalyticsLayer.md), Green layer. 
+### User Control
+Users control the entire system through:
+- **Natural Language**: Chat with the LLM control plane
+- **API**: REST/WebSocket API for programmatic control
+- **Rules**: Define automation rules and thresholds
 
-## Next steps
+## Layers
 
-* [Install](installation.md) it
+| Layer | Purpose | Agent Type |
+|-------|---------|------------|
+| [Things Layer](ThingsLayer.md) | Edge devices, local processing | Edge Agent |
+| [Industrial Layer](IndustrialLayer.md) | Factory, heavy machinery | Industrial Agent |
+| [Analytics Layer](AnalyticsLayer.md) | Cloud processing, long-term storage | Analytics Agent |
+| [Agent Layer](AgentLayer.md) | LLM orchestration and control | Orchestrator Agent |
 
-* Run it! See [usages](USAGES.md) and applications
+## Quick Start
 
+```bash
+# Start the full platform
+docker-compose up
 
+# Start specific layer
+docker-compose up -f SenActcontainer/docker-compose.yml
+
+# Chat with the LLM control plane
+curl -X POST http://localhost:8080/api/agent/query \
+  -H "Content-Type: application/json" \
+  -d '{"message": "What is the current temperature in the factory?"}'
+```
+
+## Use Cases
+
+- **Smart Manufacturing**: Agents monitor factory sensors and control machinery
+- **Environmental Monitoring**: Track conditions and trigger alerts/actions
+- **Building Automation**: HVAC, lighting, security via AI agents
+- **Agricultural Control**: Monitor soil, weather, control irrigation
+
+## Getting Started
+
+1. [Install](installation.md) the platform
+2. Configure your [sensors and actuators](SenActcontainer/README.md)
+3. Connect to the [LLM Control Plane](AgentLayer.md)
+4. Define your [automation rules](AgentLayer.md#control-plane)
+
+## License
+
+MIT License - See [LICENSE.md](LICENSE.md)
